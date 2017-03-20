@@ -84,16 +84,43 @@ _.reject = function (list, predicate) {
     return arr;
 };
 
-_.uniq = function () {
+_.uniq = function (array) {
+    if (arguments.length === 0) return [];
 
+    let res = [];
+
+    for (let i = 0; i < array.length; i++) {
+        if (!res.includes(array[i])) res.push(array[i]);
+    }
+
+    return res;
 };
 
-_.map = function () {
+_.map = function (list, iteratee) {
+    let res = [];
 
+    if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+            res.push(iteratee(list[i], i, list));
+        }
+    } else {
+        for (let key in list) {
+            res.push(iteratee(list[key], key, list));
+        }
+    }
+
+    return res;
 };
 
-_.pluck = function () {
+_.pluck = function (list, propertyName) {
+    if (!propertyName) return [];    
+    let res = [];
 
+    for (let i = 0; i < list.length; i++) {
+        res.push(list[i][propertyName]);
+    }
+
+    return res;
 };
 
 _.reduce = function () {
@@ -132,9 +159,9 @@ if (typeof module !== 'undefined') {
 4. each √
 5. indexOf √
 6. filter √
-7. reject
-8. uniq
-9. map
+7. reject √
+8. uniq √
+9. map √
 10. pluck
 11. reduce
 12. contains

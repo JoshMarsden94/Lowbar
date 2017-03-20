@@ -127,4 +127,46 @@ describe('_', function () {
     });    
   });    
 
+  describe('#uniq', function () {
+    it('is a function', function () {
+      expect(_.uniq).to.be.a('function');
+    });
+    it('returns an array', function () {
+      expect(_.uniq()).to.be.a('array');
+    });       
+    it('returns an array of only the unique values within a passed array', function () {
+      let arr = [1, 2, 3, 3, 4, 1, 6, 7, 6, 2];
+      expect(_.uniq(arr)).to.eql([1, 2, 3, 4, 6, 7]);
+    });
+  });  
+
+  describe('#map', function () {
+    it('is a function', function () {
+      expect(_.map).to.be.a('function');
+    });
+    it('returns an array', function () {
+      expect(_.map()).to.be.a('array');
+    });    
+    it('returns a new array of values by mapping each value in a list through an iteratee', function () {
+      let arr = [1, 2, 3];
+      let obj = {one: 1, two: 2, three: 3};
+      expect(_.map(arr, function (num) { return num * 3; })).to.eql([3, 6, 9]);
+      expect(_.map(obj, function (num) { return num * 3; })).to.eql([3, 6, 9]);
+    });
+  }); 
+
+  describe('#pluck', function () {
+    it('is a function', function () {
+      expect(_.pluck).to.be.a('function');
+    });
+    it('returns an array', function () {
+      expect(_.pluck()).to.be.a('array');
+    });    
+    it('returns an array of property values, if they match the property name passed', function () {
+      let stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+      expect(_.pluck(stooges, 'name')).to.eql(['moe', 'larry', 'curly']);
+      expect(_.pluck(stooges, 'age')).to.eql([40, 50, 60]);
+    });
+  });    
+
 });
