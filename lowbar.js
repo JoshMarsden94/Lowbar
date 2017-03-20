@@ -123,12 +123,21 @@ _.pluck = function (list, propertyName) {
     return res;
 };
 
-_.reduce = function () {
+// _.reduce = function () {
 
-};
+// };
 
-_.contains = function () {
-
+_.contains = function (list, value, indexFrom) {
+    if (typeof list === 'object' && !Array.isArray(list)) {
+        list = Object.values(list);
+    }
+    if (indexFrom === undefined) indexFrom = 0;
+    for (let i = indexFrom; i < list.length; i++) {
+        if (list[i] === value) {
+            return true;
+        }
+    }
+    return false;
 };
 
 _.every = function () {
@@ -162,7 +171,7 @@ if (typeof module !== 'undefined') {
 7. reject √
 8. uniq √
 9. map √
-10. pluck
+10. pluck √
 11. reduce
 12. contains
 13. every

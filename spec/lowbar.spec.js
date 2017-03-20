@@ -169,4 +169,40 @@ describe('_', function () {
     });
   });    
 
+  // describe('#reduce', function () {
+  //   it('is a function', function () {
+  //     expect(_.reduce).to.be.a('function');
+  //   });
+
+  // }); 
+  
+  describe('#contains', function () {
+    it('is a function', function () {
+      expect(_.contains).to.be.a('function');
+    });
+    it('returns false when not passed a value to search for', function () {
+      let arr = [1, 2, 3, 4, 5, 6];
+      expect(_.contains([arr])).to.eql(false);
+    });
+    it('returns true when a given value is present in a passed array', function () {
+      let arr = [1, 2, 3, 4, 5, 6];
+      expect(_.contains(arr, 4)).to.eql(true);      
+    });
+    it('returns true when a given value is present in a passed object', function () {
+      let obj = {'1': 1, '2': 2, '3': 3, '4': 4};
+      expect(_.contains(obj, 4)).to.eql(true);      
+    });   
+    it('returns true when a given value is present in a passed string', function () {
+      expect(_.contains('NorthCoders','h')).to.equal(true);  
+    });      
+    it('returns a correct boolean answer when passed an index to start searching from', function () {
+      let arr = [1, 2, 3, 4, 5, 6];
+      let obj = {'1': 1, '2': 2, '3': 3, '4': 4};
+      expect(_.contains(arr, 2, 2)).to.eql(false);      
+      expect(_.contains(arr, 4, 2)).to.eql(true);    
+      expect(_.contains(obj, 2, 2)).to.eql(false);  
+      expect(_.contains(obj, 4, 2)).to.eql(true);                    
+    });
+  });       
+
 });
