@@ -29,12 +29,27 @@ _.last = function (array, n) {
     return res;
 };
 
-_.each = function () {
-
+_.each = function (list, iteratee) {
+    if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+            iteratee(list[i], i, list);
+        }
+    } else {
+        for (let key in list) {
+            iteratee(list[key], key, list);
+        }
+    }
+    return list;
 };
 
-_.indexOf = function () {
+_.indexOf = function (array, value) {
+    if (!value) return -1;
 
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === value) return i;
+    }
+    
+    return -1;
 };
 
 _.filter = function () {
