@@ -68,8 +68,20 @@ _.filter = function (list, predicate) {
     return arr;
 };
 
-_.reject = function () {
+_.reject = function (list, predicate) {
+    let arr = [];
 
+    if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+            if (!predicate(list[i])) arr.push(list[i]);
+        }
+    } else {
+        for (let key in list) {
+            if (!predicate(list[key])) arr.push(list[key]);
+        }
+    }
+
+    return arr;
 };
 
 _.uniq = function () {
@@ -119,7 +131,7 @@ if (typeof module !== 'undefined') {
 3. last √
 4. each √
 5. indexOf √
-6. filter
+6. filter √
 7. reject
 8. uniq
 9. map
