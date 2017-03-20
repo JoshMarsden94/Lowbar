@@ -52,8 +52,20 @@ _.indexOf = function (array, value) {
     return -1;
 };
 
-_.filter = function () {
+_.filter = function (list, predicate) {
+    let arr = [];
 
+    if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+            if (predicate(list[i])) arr.push(list[i]);
+        }
+    } else {
+        for (let key in list) {
+            if (predicate(list[key])) arr.push(list[key]);
+        }
+    }
+
+    return arr;
 };
 
 _.reject = function () {
@@ -102,11 +114,11 @@ if (typeof module !== 'undefined') {
 
 /* 
 
-1. identity
-2. first
-3. last
-4. each
-5. indexOf
+1. identity √
+2. first √
+3. last √
+4. each √
+5. indexOf √
 6. filter
 7. reject
 8. uniq

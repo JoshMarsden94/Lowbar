@@ -85,4 +85,25 @@ describe('_', function () {
     });
   });  
 
+  describe('#filter', function () {
+    it('is a function', function () {
+      expect(_.filter).to.be.a('function');
+    });
+    it('returns an array', function () {
+      expect(_.filter()).to.be.a('array');
+    });    
+    it('returns an empty array when no value passes the predicate', function () {
+      let array = [1, 2, 3, 4, 5, 6];
+      expect(_.filter(array, function (num) { return num % 1.564653 == 0; })).to.eql([]);
+    });
+    it('returns an array of values that pass a predicate when passed an ARRAY originally', function () {
+      let array = [1, 2, 3, 4, 5, 6];
+      expect(_.filter(array, function (num) { return num % 2 == 0; })).to.eql([2, 4, 6]);      
+    });
+    it('returns an array of values that pass a predicate when passed an OBJECT originally', function () {
+      let object = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6};
+      expect(_.filter(object, function (num) { return num % 2 == 0; })).to.eql([2, 4, 6]);          
+    });    
+  });  
+
 });
