@@ -203,6 +203,45 @@ describe('_', function () {
       expect(_.contains(obj, 2, 2)).to.eql(false);  
       expect(_.contains(obj, 4, 2)).to.eql(true);                    
     });
-  });       
+  });      
+
+  describe('#every', function () {
+    it('is a function', function () {
+      expect(_.every).to.be.a('function');
+    });
+    it('returns a correct boolean when passed an array and predicate', function () {
+      let arr = [1, 2, 3, 4, 5, 6];
+      expect(_.every(arr, function (num) { return num % 2 == 0; })).to.eql(false);
+      expect(_.every(arr, function (num) { return num % 1 == 0; })).to.eql(true);      
+    });
+    it('returns a correct boolean when passed an object and predicate', function () {
+      let obj = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6};
+      expect(_.every(obj, function (num) { return num % 2 == 0; })).to.eql(false);
+      expect(_.every(obj, function (num) { return num % 1 == 0; })).to.eql(true);      
+    });
+  });  
+
+   describe('#some', function () {
+    it('is a function', function () {
+      expect(_.some).to.be.a('function');
+    });
+    it('returns a correct boolean when passed an array and predicate', function () {
+      let arr = [1, 2, 3, 4, 5, 6];
+      expect(_.some(arr, function (num) { return num % 2 == 0; })).to.eql(true);
+      expect(_.some(arr, function (num) { return num % 1.999 == 0; })).to.eql(false);            
+    });
+    it('returns a correct boolean when passed an object and predicate', function () {
+      let obj = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6};
+      expect(_.some(obj, function (num) { return num % 2 == 0; })).to.eql(true);
+      expect(_.some(obj, function (num) { return num % 1.999 == 0; })).to.eql(false);     
+    });    
+  });     
+
+  describe('#extends', function () {
+    it('is a function', function () {
+      expect(_.extends).to.be.a('function');
+    });
+
+  }); 
 
 });

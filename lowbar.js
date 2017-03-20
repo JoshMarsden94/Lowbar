@@ -140,12 +140,28 @@ _.contains = function (list, value, indexFrom) {
     return false;
 };
 
-_.every = function () {
+_.every = function (list, predicate) {
+    if (typeof list === 'object' && !Array.isArray(list)) {
+        list = Object.values(list);
+    }
 
+    for (let i = 0; i < list.length; i++) {
+        if (!predicate(list[i])) return false;
+    }
+
+    return true;
 };
 
-_.some = function () {
+_.some = function (list, predicate) {
+    if (typeof list === 'object' && !Array.isArray(list)) {
+        list = Object.values(list);
+    }
 
+    for (let i = 0; i < list.length; i++) {
+        if (predicate(list[i])) return true;
+    }
+
+    return false;
 };
 
 _.extends = function () {
@@ -173,9 +189,9 @@ if (typeof module !== 'undefined') {
 9. map √
 10. pluck √
 11. reduce
-12. contains
-13. every
-14. some
+12. contains √
+13. every √
+14. some √
 15. extends
 16. defaults
 
