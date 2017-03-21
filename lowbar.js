@@ -164,8 +164,14 @@ _.some = function (list, predicate) {
     return false;
 };
 
-_.extends = function () {
+_.extend = function (object, source) {
+    if (!source) return object;
 
+    _.each(source, function (value, key) {
+        object[key] = value;
+    });
+
+    return object;
 };
 
 _.defaults = function () {
@@ -188,11 +194,11 @@ if (typeof module !== 'undefined') {
 8. uniq √
 9. map √
 10. pluck √
-11. reduce
+11. reduce ?
 12. contains √
 13. every √
 14. some √
-15. extends
+15. extend √
 16. defaults
 
 // Start of Advanced:

@@ -237,9 +237,29 @@ describe('_', function () {
     });    
   });     
 
-  describe('#extends', function () {
+  describe('#extend', function () {
     it('is a function', function () {
-      expect(_.extends).to.be.a('function');
+      expect(_.extend).to.be.a('function');
+    });
+    it('returns the original object if there is no source passed', function () {
+      let obj = {name: 'moe'};
+      expect(_.extend(obj)).to.eql({name: 'moe'});
+    });
+    it('returns an object with the properties from the source object copied over', function () {
+      let obj = {name: 'moe'};
+      let source = {age: 50};
+      expect(_.extend(obj, source)).to.eql({name: 'moe', age: 50});      
+    });
+    it('does not duplicate object keys, it will overwrite any existing key/value with the latest from the source object', function () {
+      let obj = {name: 'moe', age: 50};
+      let source = {age: 22, name: 'josh'};
+      expect(_.extend(obj, source)).to.eql({name: 'josh', age: 22});            
+    });
+  }); 
+
+  describe('#defaults', function () {
+    it('is a function', function () {
+      expect(_.defaults).to.be.a('function');
     });
 
   }); 
