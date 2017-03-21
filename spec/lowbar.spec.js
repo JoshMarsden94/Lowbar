@@ -429,4 +429,49 @@ describe('_', function () {
     });
   }); 
 
+  describe('#zip', function () {
+    it('is a function', function () {
+      expect(_.zip).to.be.a('function');
+    });
+    it('works correctly when passed a list of arrays', function () {
+      expect(_.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false])).to.eql([['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]);
+    });
+  }); 
+  describe('#sortedIndex', function () {
+    it('is a function', function () {
+      expect(_.sortedIndex).to.be.a('function');
+    });
+    it('should return the insetion index', function () {
+      var actual = _.sortedIndex([10, 20, 30, 40, 50], 55);
+      var expected = 5;
+      expect(actual).to.eql(expected);
+    });
+    it('should return the insetion index', function () {
+      var stooges = [{name: 'moe', age: 40}, {name: 'curly', age: 60}];
+      var actual = _.sortedIndex(stooges, {name: 'larry', age: 50}, 'age');
+      var expected = 1;
+      expect(actual).to.eql(expected);
+    });
+    it('should work when passed iteratee', function () {
+      var test = function (num) { return Math.sin(num); };
+      var expected = 0;
+      var actual = _.sortedIndex([1, 3, 2, 4, 5, 6], 5, test);
+      expect(actual).to.eql(expected);
+    });
+  });   
+
+  describe.only('#flatten', function () {
+    it('is a function', function () {
+      expect(_.flatten).to.be.a('function');
+    });
+    it('flattens a nested array into one array', function () {
+      let arr = [1, [2], [3, [[4]]]];
+      expect(_.flatten(arr)).to.eql([1, 2, 3, 4]);
+    });
+    it('only flattens an array a single level if you pass true as a second arg', function () {
+      let arr = [1, [2], [3, [[4]]]];
+      expect(_.flatten(arr, true)).to.eql([1, 2, 3, [[4]]]);
+    });
+  });   
+
 });

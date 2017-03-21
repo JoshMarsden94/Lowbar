@@ -289,15 +289,73 @@ _.sortBy = function (list, iteratee) {
 };
 
 _.zip = function () {
+    var res = [];
+    var tempRes = [];
 
+    for (var i = 0; i < arguments[0].length; i++) {
+      for (var j = 0; j < arguments.length; j++) {
+        tempRes.push(arguments[j][i]);
+      }
+      res.push(tempRes);
+      tempRes = [];
+    }
+
+    return res;
 };
 
-_.sortedIndex = function () {
+_.sortedIndex = function (list, value, iteratee) {
+    if (arguments.length === 3) {
+        return binarySearch(_.sortBy(list, iteratee), value);
+    }
+    function binarySearch (list, name) {
+        var s = 0;
+        var e = list.length - 1;
+        for (var i = 0; i < 10; i++) {
+            var m = Math.floor((e + s) / 2);
+            if (list[m] === name) {
+                return m;
+            }
+            if (name < list[m]) {
+                e = m - 1;
+            }
+            if (name > list[m]) {
+                s = m + 1;
+            }
+        }
+        return m + 1;
+    }
 
+    return binarySearch(list, value);
 };
 
-_.flatten = function () {
-
+_.flatten = function (array, shallow) {
+    if (!Array.isArray(array)) return array;
+    let result = [];   
+    
+    if (shallow) {
+        array.forEach(function (element) {
+            if (!Array.isArray(element)) {
+                result.push(element);
+            } else {
+                element.forEach(function (element) {
+                    result.push(element);
+                });
+            }
+        });
+    } else {
+        let flattenRecursion = function (arr) {
+            if (!Array.isArray(arr)) {
+                result.push(arr);
+            } else {
+                arr.forEach(function (element) {
+                    return flattenRecursion(element);
+                });
+            }
+        };
+        flattenRecursion(array);
+    }
+    
+    return result;
 };
 
 _.intersection = function () {
@@ -342,8 +400,8 @@ if (typeof module !== 'undefined') {
 4. delay √
 5. shuffle √
 6. invoke √
-7. sortBy (NB the Underscore library uses the native JavaScript sort but feel free to use your sort algorithm!)
-8. zip
+7. sortBy (NB the Underscore library uses the native JavaScript sort but feel free to use your sort algorithm!) √
+8. zip √
 9. sortedIndex
 10. flatten
 11. intersection
