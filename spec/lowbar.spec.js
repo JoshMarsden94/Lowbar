@@ -169,13 +169,30 @@ describe('_', function () {
     });
   });    
 
-  // describe('#reduce', function () {
-  //   it('is a function', function () {
-  //     expect(_.reduce).to.be.a('function');
-  //   });
+  describe('#reduce', function () {
 
-  // }); 
-  
+    let add = function (acc, num) {return acc + num;};
+    let upperCase = function (acc, letter) {return acc + letter.toUpperCase();};
+
+    it('is a function', function () {
+      expect(_.reduce).to.be.a('function');
+    });
+    it('uses the first element passed when an accumulator is not passed', function () {
+      expect(_.reduce([1, 2, 3, 4, 5], add)).to.eql(15);
+    });
+    it('returns a single number of each number added together if passed an array and an addition function', function () {
+      expect(_.reduce([1, 2, 3, 4, 5], add, 0)).to.eql(15);
+      expect(_.reduce([1, 2, 3, 4, 5], add, 5)).to.eql(20);      
+    });
+    it('returns a string to uppercase when passed a str and upperCase function', function () {
+      expect(_.reduce('northcoders', upperCase, '')).to.eql('NORTHCODERS');
+    });
+    it('returns a single number of each value from an object of numbers added up', function () {
+      let object = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5};
+      expect(_.reduce(object, add, 0)).to.eql(15);
+    });
+  }); 
+
   describe('#contains', function () {
     it('is a function', function () {
       expect(_.contains).to.be.a('function');

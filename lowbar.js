@@ -123,9 +123,18 @@ _.pluck = function (list, propertyName) {
     return res;
 };
 
-// _.reduce = function () {
+_.reduce = function (list, iteratee, acc) {
 
-// };
+  _.each(list, function (item) {   
+    if (acc === undefined) {
+      acc = item;
+    } else {
+      acc = iteratee(acc, item);
+    }
+  });
+
+  return acc;
+};
 
 _.contains = function (list, value, indexFrom) {
     if (typeof list === 'object' && !Array.isArray(list)) {
