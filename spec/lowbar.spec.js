@@ -460,7 +460,7 @@ describe('_', function () {
     });
   });   
 
-  describe.only('#flatten', function () {
+  describe('#flatten', function () {
     it('is a function', function () {
       expect(_.flatten).to.be.a('function');
     });
@@ -473,5 +473,23 @@ describe('_', function () {
       expect(_.flatten(arr, true)).to.eql([1, 2, 3, [[4]]]);
     });
   });   
+
+  describe('#intersection', function () {
+    it('is a function', function () {
+      expect(_.intersection).to.be.a('function');
+    });
+    it('returns the correct array when passed several arrays of nums', function () {
+      expect(_.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])).to.eql([1, 2]);
+    });
+  });     
+
+  describe.only('#difference', function () {
+    it('is a function', function () {
+      expect(_.difference).to.be.a('function');
+    });
+    it('returns the correct array when passed several arrays of nums', function () {
+      expect(_.difference([1, 2, 3, 4, 5], [5, 2, 10])).to.eql([1, 3, 4]);
+    });
+  });  
 
 });

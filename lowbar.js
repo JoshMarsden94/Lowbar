@@ -359,11 +359,45 @@ _.flatten = function (array, shallow) {
 };
 
 _.intersection = function () {
+    var array = Array.prototype.slice.call(arguments);
 
+    var result = [];
+
+    _.each(array[0], function (item) {
+        var duplicated = false;
+        for (var i = 1; i < array.length; i++) {
+            _.each(array[i], function (check) {
+                if (item === check) {
+                    duplicated = true;
+                }
+            });
+        } if (duplicated) {
+            result.push(item);
+        }
+    });
+
+    return result;
 };
 
 _.difference = function () {
+    var array = Array.prototype.slice.call(arguments);
 
+    var result = [];
+
+    _.each(array[0], function (item) {
+        var duplicated = false;
+        for (var i = 1; i < array.length; i++) {
+            _.each(array[i], function (check) {
+                if (item === check) {
+                    duplicated = true;
+                }
+            });
+        } if (!duplicated) {
+            result.push(item);
+        }
+    });
+
+    return result;
 };
 
 _.throttle = function () {
@@ -402,10 +436,10 @@ if (typeof module !== 'undefined') {
 6. invoke √
 7. sortBy (NB the Underscore library uses the native JavaScript sort but feel free to use your sort algorithm!) √
 8. zip √
-9. sortedIndex
-10. flatten
-11. intersection
-12. difference
+9. sortedIndex √
+10. flatten √
+11. intersection √
+12. difference √
 13. throttle
 
 */
