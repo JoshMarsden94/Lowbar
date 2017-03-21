@@ -390,7 +390,7 @@ describe('_', function () {
     });    
   });   
 
-  describe.only('#shuffle', function () {
+  describe('#shuffle', function () {
     it('is a function', function () {
       expect(_.shuffle).to.be.a('function');
     });
@@ -402,6 +402,17 @@ describe('_', function () {
     });
   });   
 
+  describe.only('#invoke', function () {
+    it('is a function', function () {
+      expect(_.invoke).to.be.a('function');
+    });
+    it('works correctly when not passed any optional arguments', function () {
+      expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'sort')).to.eql([[1, 5, 7], [1, 2, 3]]);
+      expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'join')).to.eql(['5,1,7', '3,2,1']);
+    });
+    it('works correctly when passed optional arguments to be passed on to the method', function () {
+      expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'slice', 2)).to.eql([[7], [1]]);
+    });    
+  }); 
+
 });
-
-

@@ -99,15 +99,9 @@ _.uniq = function (array) {
 _.map = function (list, iteratee) {
     let res = [];
 
-    if (Array.isArray(list)) {
-        for (let i = 0; i < list.length; i++) {
-            res.push(iteratee(list[i], i, list));
-        }
-    } else {
-        for (let key in list) {
-            res.push(iteratee(list[key], key, list));
-        }
-    }
+    _.each(list, function (item) {
+      res.push(iteratee(item));
+    });
 
     return res;
 };
@@ -274,8 +268,16 @@ _.shuffle = function (list) {
     return res;    
 };
 
-_.invoke = function () {
+_.invoke = function (list, method, args) {
+    let listCopy = list.slice();
 
+    return _.map(listCopy, function (item) {
+        if (typeof(method) === 'string') {
+            method = item[method];
+        }
+
+        return method.call(item, args);
+    });
 };
 
 _.sortBy = function () {
