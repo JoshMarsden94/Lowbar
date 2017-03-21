@@ -402,7 +402,7 @@ describe('_', function () {
     });
   });   
 
-  describe.only('#invoke', function () {
+  describe('#invoke', function () {
     it('is a function', function () {
       expect(_.invoke).to.be.a('function');
     });
@@ -413,6 +413,20 @@ describe('_', function () {
     it('works correctly when passed optional arguments to be passed on to the method', function () {
       expect(_.invoke([[5, 1, 7], [3, 2, 1]], 'slice', 2)).to.eql([[7], [1]]);
     });    
+  }); 
+
+  describe('#sortBy', function () {
+    it('is a function', function () {
+      expect(_.sortBy).to.be.a('function');
+    });
+    it('returns a correctly sorted list when passed a function as a second argument', function () {
+      let arr = [1, 2, 3, 4, 5, 6];
+      expect(_.sortBy(arr, function (num) { return Math.sin(num);})).to.eql([5, 4, 6, 3, 1, 2]);
+    });
+    it('returns a correctly sorted list by length', function () {
+      let arr = ['one', 'two', 'three', 'four', 'five'];
+      expect(_.sortBy(arr, 'length')).to.eql(['one', 'two', 'four', 'five', 'three']);
+    });
   }); 
 
 });

@@ -280,8 +280,12 @@ _.invoke = function (list, method, args) {
     });
 };
 
-_.sortBy = function () {
-
+_.sortBy = function (list, iteratee) {
+    if (typeof(iteratee) === 'function') {
+      return list.sort(function (a, b) {return iteratee(a) - iteratee(b);});
+    } else {
+      return list.sort(function (a,b) {return a[iteratee] - b[iteratee];});
+    } 
 };
 
 _.zip = function () {
@@ -337,7 +341,7 @@ if (typeof module !== 'undefined') {
 3. memoize √
 4. delay √
 5. shuffle √
-6. invoke
+6. invoke √
 7. sortBy (NB the Underscore library uses the native JavaScript sort but feel free to use your sort algorithm!)
 8. zip
 9. sortedIndex
