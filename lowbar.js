@@ -249,12 +249,29 @@ _.memoize = function (func) {
   return speedy;
 };
 
-_.delay = function () {
+_.delay = function (func, wait) {
+    const args = Array.from(arguments).slice(2);
 
+  setTimeout(function () {
+    func.apply(null, args); 
+  }, wait);
 };
 
-_.shuffle = function () {
+_.shuffle = function (list) {
+    if (typeof list === 'object' && !Array.isArray(list)) {
+        list = Object.values(list);
+    }
 
+    let shuffledList = list.slice();
+    let res = [];
+
+    for (let i = 0; i < list.length; i++) {
+      let random = Math.floor(Math.random() * shuffledList.length);
+      res.push(shuffledList[random]);
+      shuffledList.splice(random,1);
+    }
+
+    return res;    
 };
 
 _.invoke = function () {
@@ -315,9 +332,9 @@ if (typeof module !== 'undefined') {
 // Start of Advanced:
 1. indexOfAdv (again, this time with a binary search) √
 2. once √
-3. memoize
-4. delay
-5. shuffle
+3. memoize √
+4. delay √
+5. shuffle √
 6. invoke
 7. sortBy (NB the Underscore library uses the native JavaScript sort but feel free to use your sort algorithm!)
 8. zip

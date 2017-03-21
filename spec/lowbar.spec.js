@@ -365,4 +365,43 @@ describe('_', function () {
     });    
   }); 
 
+  describe('#delay', function () {
+    it('is a function', function () {
+      expect(_.delay).to.be.a('function');
+    });
+    it('only calls a function after a specified amount of time', function (done) {
+      var delaySpy = sinon.spy();
+      _.delay(delaySpy, 500);
+
+      setTimeout(function () {
+        expect(delaySpy.calledOnce).to.equal(true);
+        done();
+      }, 800);      
+    });
+    it('applies optional args if passed', function (done) {
+      var delaySpy = sinon.spy();
+      _.delay(delaySpy, 500, 5, 6);
+
+      setTimeout(function () {
+        expect(delaySpy.calledOnce).to.equal(true);
+        expect(delaySpy.calledWithExactly(5, 6)).to.equal(true);
+        done();
+      }, 800);        
+    });    
+  });   
+
+  describe.only('#shuffle', function () {
+    it('is a function', function () {
+      expect(_.shuffle).to.be.a('function');
+    });
+    it('returns an array with the same amount of properties as passed', function () {
+      let arr = [1, 2, 3, 4, 5, 6, 7];
+      let obj = {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6};          
+      expect(_.shuffle(arr).length).to.eql(7);
+      expect(_.shuffle(obj).length).to.eql(6);
+    });
+  });   
+
 });
+
+
