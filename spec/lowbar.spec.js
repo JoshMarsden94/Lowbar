@@ -261,7 +261,20 @@ describe('_', function () {
     it('is a function', function () {
       expect(_.defaults).to.be.a('function');
     });
-
+    it('returns the original object if there are no defaults passed', function () {
+      let obj = {name: 'moe'};
+      expect(_.defaults(obj)).to.eql({name: 'moe'});
+    });   
+    it('returns an object with the properties from the defaults object copied over if they dont exist in the original object', function () {
+      let obj = {name: 'moe'};
+      let defaults = {age: 50};
+      expect(_.defaults(obj, defaults)).to.eql({name: 'moe', age: 50});      
+    });   
+    it('Does not duplicate object keys and it will not overwrite any existing key/val pair from the defaults list', function () {
+      let obj = {name: 'moe', age: 50};
+      let defaults = {age: 22, name: 'josh', hungry: true};
+      expect(_.defaults(obj, defaults)).to.eql({name: 'moe', age: 50, hungry: true});  
+    });
   }); 
 
 });

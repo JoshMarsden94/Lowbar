@@ -174,8 +174,16 @@ _.extend = function (object, source) {
     return object;
 };
 
-_.defaults = function () {
+_.defaults = function (object, defaults) {
+    if (!defaults) return object;
 
+    _.each(defaults, function (value, key) {
+        if (object[key] === undefined) {
+            object[key] = value;
+        }
+    });
+    
+    return object;
 };
 
 if (typeof module !== 'undefined') {
