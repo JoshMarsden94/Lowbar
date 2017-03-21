@@ -43,7 +43,7 @@ _.each = function (list, iteratee) {
 };
 
 _.indexOf = function (array, value) {
-    if (!value) return -1;
+    if (!Array.isArray(array) || !value) return - 1;
 
     for (let i = 0; i < array.length; i++) {
         if (array[i] === value) return i;
@@ -195,6 +195,81 @@ _.defaults = function (object, defaults) {
     return object;
 };
 
+_.indexOfAdv = function (array, value, isSorted) {
+    if (!Array.isArray(array) || !value) return - 1;
+    if (!isSorted) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] === value) return i;
+        }
+    }
+    var low = 0;
+    var high = array.length - 1;
+    var mid;
+    var element;
+    
+    while (low <= high) {
+      mid = Math.floor((low + high) / 2, 10);
+      element = array[mid];
+      if (element < value) {
+        low = mid + 1;
+      } else if (element > value) {
+        high = mid - 1;
+      } else {
+        return mid;
+      }
+    }
+
+    return -1;    
+};
+
+_.once = function () {
+
+};
+
+_.memoize = function () {
+
+};
+
+_.delay = function () {
+
+};
+
+_.shuffle = function () {
+
+};
+
+_.invoke = function () {
+
+};
+
+_.sortBy = function () {
+
+};
+
+_.zip = function () {
+
+};
+
+_.sortedIndex = function () {
+
+};
+
+_.flatten = function () {
+
+};
+
+_.intersection = function () {
+
+};
+
+_.difference = function () {
+
+};
+
+_.throttle = function () {
+
+};
+
 if (typeof module !== 'undefined') {
   module.exports = _;
 }
@@ -211,15 +286,15 @@ if (typeof module !== 'undefined') {
 8. uniq √
 9. map √
 10. pluck √
-11. reduce ?
+11. reduce √
 12. contains √
 13. every √
 14. some √
 15. extend √
-16. defaults
+16. defaults √
 
 // Start of Advanced:
-1. indexOf (again, this time with a binary search)
+1. indexOfAdv (again, this time with a binary search)
 2. once
 3. memoize
 4. delay

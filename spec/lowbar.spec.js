@@ -294,4 +294,25 @@ describe('_', function () {
     });
   }); 
 
+  describe('#indexOfAdv', function () {
+    it('is a function', function () {
+      expect(_.indexOfAdv).to.be.a('function');
+    });
+    it('returns -1 when a value is either not passed or is not in the array', function () {
+      let array = [1, 2, 3, 4, 5, 1];
+      expect(_.indexOf(array)).to.eql(-1);
+      expect(_.indexOf(array, 6)).to.eql(-1);
+    });
+    it('returns the correct index position of a value within a given array', function () {
+      let array = [1, 2, 3, 4, 5, 1];
+      expect(_.indexOf(array, 2)).to.eql(1);
+      expect(_.indexOf(array, 5)).to.eql(4);            
+      expect(_.indexOf(array, 1)).to.eql(0);            
+    });
+    it('runs a binary search and returns the index at which a value can be found in an array if list is already sorted', function () {
+      let arr = [1, 2, 3, 4, 5, 6, 7];
+      expect(_.indexOf(arr, 6, true)).to.equal(5);
+    });
+  }); 
+
 });
