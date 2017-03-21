@@ -315,4 +315,54 @@ describe('_', function () {
     });
   }); 
 
+  describe('#once', function () {
+    it('is a function', function () {
+      expect(_.once).to.be.a('function');
+    });
+    it('runs a function only once', function () {
+        var addSpy = sinon.spy();
+        var onceAdd = _.once(addSpy);
+        onceAdd();
+        onceAdd();
+        onceAdd();
+        expect(addSpy.callCount).to.equal(1);       
+    });
+  }); 
+
+  describe('#memoize', function () {
+    function fib (num) {
+      if (num < 2) return 1;
+      return fib(num - 1) + fib(num - 2);
+    }
+    it('is a function', function () {
+      expect(_.memoize).to.be.a('function');
+    });
+    it('returns a function that does the same thing as the function passed', function () {
+      const speedyFib = _.memoize(fib);
+      const normalRes = fib(5);
+      const speedyRes = speedyFib(5);
+      expect(speedyRes).to.equal(normalRes);
+    }); 
+    it('returns a faster version of the function passed', function () {
+      const speedyFib = _.memoize(fib);
+      speedyFib(37);
+     
+      const beforeSlow = new Date().getTime();
+      fib(37);
+      const slowDiff = new Date().getTime() - beforeSlow;
+
+      const beforeFast = new Date().getTime();
+      speedyFib(37);
+      const fastDiff = new Date().getTime() - beforeFast;
+
+      expect(slowDiff > fastDiff).to.equal(true);
+    });     
+    it('the original function gets called with all the arguments passed to the memoized function', function () {
+        var spy = sinon.spy();
+        var memoizeSpy = _.memoize(spy);
+        memoizeSpy('tomato', 13, [1, 2, 3], true);
+        expect(spy.firstCall.calledWithExactly('tomato', 13, [1, 2, 3], true)).to.be.true;
+    });    
+  }); 
+
 });

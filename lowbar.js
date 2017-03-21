@@ -222,12 +222,31 @@ _.indexOfAdv = function (array, value, isSorted) {
     return -1;    
 };
 
-_.once = function () {
-
+_.once = function (func) {
+    var called = false;
+    return function () {
+        if (!called) {
+            called = true;
+            return func();
+        }
+    };
 };
 
-_.memoize = function () {
+_.memoize = function (func) {
 
+  const cache = {};
+  const speedy = function () {
+    const arg = JSON.stringify(arguments[0]);
+    if (cache[arg]) return cache[arg];
+    else {
+      const res = func.apply(null, arguments);
+      cache[arg] = res;
+      return res;
+    }
+  };
+  speedy.cache = cache;
+
+  return speedy;
 };
 
 _.delay = function () {
@@ -294,8 +313,8 @@ if (typeof module !== 'undefined') {
 16. defaults √
 
 // Start of Advanced:
-1. indexOfAdv (again, this time with a binary search)
-2. once
+1. indexOfAdv (again, this time with a binary search) √
+2. once √
 3. memoize
 4. delay
 5. shuffle
