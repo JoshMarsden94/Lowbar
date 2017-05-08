@@ -400,46 +400,6 @@ _.difference = function () {
     return result;
 };
 
-_.throttle = function () {
-
-};
-
 if (typeof module !== 'undefined') {
   module.exports = _;
 }
-
-/* 
-
-1. identity √
-2. first √
-3. last √
-4. each √
-5. indexOf √
-6. filter √
-7. reject √
-8. uniq √
-9. map √
-10. pluck √
-11. reduce √
-12. contains √
-13. every √
-14. some √
-15. extend √
-16. defaults √
-
-// Start of Advanced:
-1. indexOfAdv (again, this time with a binary search) √
-2. once √
-3. memoize √
-4. delay √
-5. shuffle √
-6. invoke √
-7. sortBy (NB the Underscore library uses the native JavaScript sort but feel free to use your sort algorithm!) √
-8. zip √
-9. sortedIndex √
-10. flatten √
-11. intersection √
-12. difference √
-13. throttle
-
-*/
